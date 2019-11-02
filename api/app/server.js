@@ -1,6 +1,6 @@
 const fastify = require('fastify')();
 const port = 3000;
-const knex = require('./knex');
+const { addUser, root } = require('./controllers');
 
 const start = async () => {
   await fastify.listen(port);
@@ -9,14 +9,5 @@ const start = async () => {
 
 start();
 
-fastify.get('/', async (request, reply) => {
-  return { hello: 'world' }
-});
-
-fastify.post('/user', async (req, res) => {
-  await knex('users')
-    .insert(req.body)
-    .catch(console.error);
-
-  res.status(200).send();
-})
+fastify.get('/', root);
+fastify.post('/user', addUser);
