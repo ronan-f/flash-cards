@@ -1,11 +1,9 @@
-const knex = require('../knex');
+const { saveUser } = require('../DAL');
 
 const addUser = async (req, res) => {
-  await knex('users')
-    .insert(req.body)
-    .catch(console.error);
-
-  res.status(200).send();
+  const user = req.body;
+  await saveUser(user);
+  res.status(200).send("Success");
 }
 
 module.exports = addUser;
