@@ -1,6 +1,6 @@
 const fastify = require('fastify')();
 const port = 3000;
-const { addUser, root } = require('./controllers');
+const { createUser, root } = require('./controllers');
 
 const start = async () => {
   await fastify.listen(port);
@@ -10,4 +10,4 @@ const start = async () => {
 start();
 
 fastify.get('/', root);
-fastify.post('/user', addUser);
+fastify.post('/user', createUser);

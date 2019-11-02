@@ -1,9 +1,13 @@
 const knex = require('./knex');
 
-const addUser = async (user) => {
+const saveUser = async (name, email, hashedPassword) => {
   await knex('users')
-    .insert(user)
+    .insert({
+      name,
+      email,
+      password: hashedPassword
+    })
     .catch(console.error);
 };
 
-module.exports = addUser;
+module.exports = saveUser;

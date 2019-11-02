@@ -1,4 +1,4 @@
 module.exports = {
-  addUser: require('./addUser'),
+  createUser: require('./createUser'),
   root: require('./root')
 }
