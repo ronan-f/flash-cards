@@ -1,5 +1,5 @@
 module.exports = {
-  createUser: require('./createUser'),
+  signUp: require('./signUp'),
   root: require('./root'),
   signIn: require('./signIn')
 }

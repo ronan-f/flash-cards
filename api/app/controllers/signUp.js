@@ -1,6 +1,6 @@
 const UserService = require('../services/User');
 
-const createUser = async (req, res) => {
+const signUp = async (req, res) => {
   try {
     const user = req.body;
     const result = await UserService.signUp(user);
@@ -11,4 +11,4 @@ const createUser = async (req, res) => {
   }
 }
 
-module.exports = createUser;
+module.exports = signUp;
