@@ -8,10 +8,10 @@ class UserService {
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     await saveUser(name, email, hashedPassword);
-
     return {
       name,
-      email
+      email,
+      token: "Success"
     }
   }
 
