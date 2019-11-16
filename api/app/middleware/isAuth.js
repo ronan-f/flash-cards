@@ -14,4 +14,4 @@ module.exports = jwt({
   secret: config.jwt.signature,
   userProperty: 'token',
   getToken: getTokenFromHeader
-})
+});

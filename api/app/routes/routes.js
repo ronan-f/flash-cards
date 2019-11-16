@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const { signUp, root, signIn } = require('../controllers');
 const validation = require('./validation');
 const isAuth = require('../middleware/isAuth');
+const getRequestor = require('../middleware/getRequestor');
 
 module.exports.set = (app) => {
   app.use(cors());
@@ -14,8 +15,9 @@ module.exports.set = (app) => {
   app.post('/signin', signIn);
   // ----------------------
 
-  app.use(isAuth);
   // Authenticated routes
+  app.use(isAuth);
+  app.use(getRequestor);
   // ----------------------
   // ----------------------
 }

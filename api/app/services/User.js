@@ -37,17 +37,16 @@ class UserService {
 
   }
 
-  _generateJWT(id, email, password) {
+  _generateJWT(id, email) {
     const data = {
       id,
-      email,
-      password
+      email
     }
 
     const { signature } = config.jwt;
     const expiration = '6h';
 
-    return jwt.sign({ data, }, signature, { expiresIn: expiration });
+    return jwt.sign({ data }, signature, { expiresIn: expiration });
   }
 }
 
