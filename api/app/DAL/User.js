@@ -8,7 +8,10 @@ class User {
       .select('*')
       .where({ email })
       .then(res => res[0])
-      .catch(console.error);
+      .catch(e => {
+        console.error(e);
+        throw Error('Could not get user', e);
+      });
   }
 
   async saveUser(name, email, hashedPassword) {
@@ -18,7 +21,10 @@ class User {
         email,
         password: hashedPassword
       })
-      .catch(console.error);
+      .catch(e => {
+        console.error(e);
+        throw Error('Could not save user', e);
+      });
   };
 }
 
