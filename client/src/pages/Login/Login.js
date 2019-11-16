@@ -1,32 +1,59 @@
-import React from 'react';
-import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import { Link } from 'react-router-dom';
-import { ROUTE_REGISTER, ROUTE_FORGOT_PASSWORD } from '../../constants';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Link, withRouter } from 'react-router-dom';
+import { ROUTE_REGISTER, ROUTE_FORGOT_PASSWORD, ROUTE_DASHBOARD } from '../../constants';
 import './Login.styles.scss';
 
-const Login = () => (
-  <div className="vertical-center light-blue">
-    <Form className="login-form shadow rounded">
-      <h1 className="text-center">
-        <span className="font-weight-bold">FlashCards</span>.com
-      </h1>
-      <h2 className="text-center">Welcome</h2>
-      <FormGroup>
-        <Label>Email</Label>
-        <Input type="email" placeholder="eg. john@smith.com" />
-      </FormGroup>
-      <FormGroup>
-        <Label>Password</Label>
-        <Input type="password" placeholder="Password" />
-      </FormGroup>
-      <Button className="btn-lg btn-dark btn-block">Sign In</Button>
-      <div className="text-center p-3">
-        <Link to={ ROUTE_REGISTER }>Register</Link>
-        <span className="p-2">|</span>
-        <Link to={ ROUTE_FORGOT_PASSWORD }>Forgot Password</Link>
-      </div>
-    </Form>
-  </div>
-);
+const Login = ({ history }) => {
+  const initialState = {
+    email: "",
+    password: ""
+  }
+  const [state, updateState] = useState(initialState);
 
-export default Login;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    updateState({
+      ...state,
+      [name]: value
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await axios.post("http://localhost:3000/signin", state);
+    if(res.data.token) {
+      updateState(initialState);
+      document.cookie = `token=${res.data.token}`
+      history.push(ROUTE_DASHBOARD);
+    }
+  };
+
+  return (
+    <div className="vertical-center light-blue">
+      <Form className="login-form shadow rounded">
+        <h1 className="text-center">
+          <span className="font-weight-bold">FlashCards</span>.com
+      </h1>
+        <h2 className="text-center">Welcome</h2>
+        <FormGroup>
+          <Label>Email</Label>
+          <Input onChange={handleChange} type="email" name="email" placeholder="eg. john@smith.com" />
+        </FormGroup>
+        <FormGroup>
+          <Label>Password</Label>
+          <Input onChange={handleChange} type="password" name="password" placeholder="Password" />
+        </FormGroup>
+        <Button type="submit" onClick={ handleSubmit } className="btn-lg btn-dark btn-block">Sign In</Button>
+        <div className="text-center p-3">
+          <Link to={ROUTE_REGISTER}>Register</Link>
+          <span className="p-2">|</span>
+          <Link to={ROUTE_FORGOT_PASSWORD}>Forgot Password</Link>
+        </div>
+      </Form>
+    </div>
+  )
+};
+
+export default withRouter(Login);
