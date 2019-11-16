@@ -7,7 +7,7 @@ module.exports = async (req, res, next) => {
    req.currentUser = userRecord;
 
   if(!userRecord) {
-    return res.status(401).end('User not found')
+    return res.status(401).send('User not found')
   } else {
     return next();
   }
