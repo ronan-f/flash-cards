@@ -1,5 +1,4 @@
-const saveUser = require('../DAL/saveUser');
-const getUser = require('../DAL/getUser');
+const { User } = require('../DAL');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
@@ -8,7 +7,7 @@ const config = require('../../config');
 class UserService {
   async signUp({ name, email, password }) {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    const userRecord = await saveUser(name, email, hashedPassword);
+    const userRecord = await User.saveUser(name, email, hashedPassword);
     return {
       name,
       email,
@@ -17,13 +16,13 @@ class UserService {
   }
 
   async signIn({ email, password }) {
-    const user = await getUser(email);
+    const userRecord = await User.getUser(email);
 
-    if(!user) {
+    if(!userRecord) {
       throw "User not found";
     }
 
-    const isCorrectPassword = await bcrypt.compare(password, user.password);
+    const isCorrectPassword = await bcrypt.compare(password, userRecord.password);
 
     if(!isCorrectPassword) {
       throw "Invalid password";

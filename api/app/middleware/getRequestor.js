@@ -1,8 +1,8 @@
-const getUser = require('../DAL/getUser');
+const { User } = require('../DAL');
 
 module.exports = async (req, res, next) => {
   const { email } = req.token;
-  const userRecord = await getUser(email);
+  const userRecord = await User.getUser(email);
 
    req.currentUser = userRecord;
 
