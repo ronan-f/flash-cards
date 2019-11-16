@@ -3,9 +3,9 @@ import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import './Login.styles.scss';
 
 const Login = () => (
-  <div className="vertical-center">
-    <Form className="login-form">
-      <h1>
+  <div className="vertical-center light-blue">
+    <Form className="login-form shadow rounded">
+      <h1 className="text-center">
         <span className="font-weight-bold">FlashCards</span>.com
       </h1>
       <h2 className="text-center">Welcome</h2>
