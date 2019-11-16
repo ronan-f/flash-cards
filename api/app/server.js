@@ -1,21 +1,20 @@
-const fastify = require('fastify')();
+const express = require('express')
+const app = express();
 const port = 3000;
-const config = require('../config');
-const routes = require('./routes');
+const routes = require('./routes/routes');
+const cors = require('cors')
+const bodyParser = require('body-parser');
 
-fastify.register(require('fastify-cors'));
-fastify.register(require('fastify-jwt'), {
-  secret: config.jwt.signature
-});
+app.use(cors());
+app.use(bodyParser.json());
 
+routes.set(app);
 
 const start = async () => {
-  await fastify.listen(port);
-
+  app.listen(port);
   console.log(`Listening on ${port} 🚀🚀🚀`);
 }
 
 start();
 
-routes.set(fastify);
 
