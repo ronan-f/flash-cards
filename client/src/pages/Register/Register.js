@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import { Link } from 'react-router-dom';
-import { ROUTE_SIGN_IN, ROUTE_FORGOT_PASSWORD } from '../../constants';
+import { Link, withRouter } from 'react-router-dom';
+import { ROUTE_SIGN_IN, ROUTE_FORGOT_PASSWORD, ROUTE_DASHBOARD } from '../../constants';
 
-const Login = () => {
+const Login = ({ history }) => {
   const initialState = {
     name: "",
     email: "",
@@ -17,8 +18,15 @@ const Login = () => {
       ...state,
       [name]: value
     })
-    console.log(state);
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await axios.post("http://localhost:3000/signup", state);
+    if(res.data.token) {
+      history.push(ROUTE_DASHBOARD);
+    }
+  };
 
   return (
   <div className="vertical-center light-blue">
@@ -39,7 +47,7 @@ const Login = () => {
         <Label>Password</Label>
         <Input onChange={ handleChange } type="password" name="password" placeholder="Password" />
       </FormGroup>
-      <Button className="btn-lg btn-dark btn-block">Register</Button>
+      <Button onClick={ handleSubmit } type="submit" className="btn-lg btn-dark btn-block">Register</Button>
       <div className="text-center p-3">
         <Link to={ ROUTE_SIGN_IN }>Sign In</Link>
         <span className="p-2">|</span>
@@ -49,4 +57,4 @@ const Login = () => {
   </div>
 )};
 
-export default Login;
+export default withRouter(Login);
