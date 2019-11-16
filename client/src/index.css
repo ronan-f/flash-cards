@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #81cfe8;
+  background-color: #59d1f7;
 }
 
 code {
@@ -15,5 +15,5 @@ code {
 }
 
 .light-blue {
-  background-color: #81cfe8;
+  background-color: #59d1f7;
 }
