@@ -3,12 +3,14 @@ import axios from 'axios';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { ROUTE_REGISTER, ROUTE_FORGOT_PASSWORD, ROUTE_DASHBOARD } from '../../constants';
+import CustomAlert from '../../components/Alert';
 import './Login.styles.scss';
 
 const Login = ({ history }) => {
   const initialState = {
     email: "",
-    password: ""
+    password: "",
+    error: ""
   }
   const [state, updateState] = useState(initialState);
 
@@ -22,13 +24,22 @@ const Login = ({ history }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post("http://localhost:3000/signin", state);
-    if(res.data.token) {
-      updateState(initialState);
-      document.cookie = `token=${res.data.token}`
-      history.push(ROUTE_DASHBOARD);
+    try {
+      const res = await axios.post("http://localhost:3000/signin", state);
+      if (res.data.token) {
+        updateState(initialState);
+        document.cookie = `token=${res.data.token}`
+        history.push(ROUTE_DASHBOARD);
+      }
+    } catch (e) {
+      updateState({
+        ...state,
+        error: e.response.data,
+      })
     }
   };
+
+  const { error } = state;
 
   return (
     <div className="vertical-center light-blue">
@@ -37,6 +48,7 @@ const Login = ({ history }) => {
           <span className="font-weight-bold">FlashCards</span>.com
       </h1>
         <h2 className="text-center">Welcome</h2>
+        { error && <CustomAlert message={ error }/>}
         <FormGroup>
           <Label>Email</Label>
           <Input onChange={handleChange} type="email" name="email" placeholder="eg. john@smith.com" />
@@ -45,7 +57,7 @@ const Login = ({ history }) => {
           <Label>Password</Label>
           <Input onChange={handleChange} type="password" name="password" placeholder="Password" />
         </FormGroup>
-        <Button type="submit" onClick={ handleSubmit } className="btn-lg btn-dark btn-block">Sign In</Button>
+        <Button type="submit" onClick={handleSubmit} className="btn-lg btn-dark btn-block">Sign In</Button>
         <div className="text-center p-3">
           <Link to={ROUTE_REGISTER}>Register</Link>
           <span className="p-2">|</span>

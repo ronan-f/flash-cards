@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
+import CustomAlert from '../../components/Alert';
 import { ROUTE_SIGN_IN, ROUTE_FORGOT_PASSWORD, ROUTE_DASHBOARD } from '../../constants';
 
 const Login = ({ history }) => {
   const initialState = {
     name: "",
     email: "",
-    password: ""
+    password: "",
+    error: ""
   }
   const [state, updateState] = useState(initialState);
 
@@ -22,13 +24,22 @@ const Login = ({ history }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post("http://localhost:3000/signup", state);
-    if(res.data.token) {
-      updateState(initialState);
-      document.cookie = `token=${res.data.token}`;
-      history.push(ROUTE_DASHBOARD);
+    try {
+      const res = await axios.post("http://localhost:3000/signup", state);
+      if(res.data.token) {
+        updateState(initialState);
+        document.cookie = `token=${res.data.token}`;
+        history.push(ROUTE_DASHBOARD);
+      }
+    } catch(e) {
+      updateState({
+        ...state,
+        error: e.response.data
+      })
     }
   };
+
+  const { error } = state;
 
   return (
   <div className="vertical-center light-blue">
@@ -37,6 +48,7 @@ const Login = ({ history }) => {
         <span className="font-weight-bold">FlashCards</span>.com
       </h1>
       <h2 className="text-center">Register</h2>
+      { error && <CustomAlert message={ error } /> }
       <FormGroup>
         <Label>Name</Label>
         <Input onChange={ handleChange } type="text" name="name" placeholder="eg. John Smith" />

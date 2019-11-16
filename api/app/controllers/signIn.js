@@ -7,7 +7,7 @@ const createUser = async (req, res) => {
     res.status(200).send(result);
   } catch (e) {
     console.error(e);
-    res.status(403).send("Couldn't sign in");
+    res.status(403).send("Oops! Couldn't sign in. Please check your credentials and try again");
   }
 }
 
