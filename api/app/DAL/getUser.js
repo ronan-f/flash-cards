@@ -1,11 +1,16 @@
-const knex = require('./knex');
+class User {
+  constructor(dbClient) {
+    this.dbClient = dbClient;
+  }
 
-const getUser = async (email) => {
-  return await knex('users')
-    .select('*')
-    .where({ email })
-    .then(res => res[0])
-    .catch(console.error);
-};
+  async getUser(email) {
 
-module.exports = getUser;
+    return await this.dbClient('users')
+      .select('*')
+      .where({ email })
+      .then(res => res[0])
+      .catch(console.error);
+  }
+}
+
+module.exports = (dbClient) => new User(dbClient);
