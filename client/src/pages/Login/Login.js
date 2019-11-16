@@ -4,6 +4,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { ROUTE_REGISTER, ROUTE_FORGOT_PASSWORD, ROUTE_DASHBOARD } from '../../constants';
 import CustomAlert from '../../components/CustomAlert';
+import { isEmailValid } from '../../utilities/validator';
 import './Login.styles.scss';
 
 const Login = ({ history }) => {
@@ -22,20 +23,33 @@ const Login = ({ history }) => {
     })
   }
 
+  const isInputValid = (email, password) => {
+    if(!isEmailValid(email) || password.length < 8) {
+      return updateState({
+        ...state,
+        error: "Oops! Input is invalid/incorrect. Try again."
+      })
+    }
+    return true;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:3000/signin", state);
-      if (res.data.token) {
-        updateState(initialState);
-        document.cookie = `token=${res.data.token}`
-        history.push(ROUTE_DASHBOARD);
+    const { email, password } = state;
+    if(isInputValid(email, password)) {
+      try {
+        const res = await axios.post("http://localhost:3000/signin", state);
+        if (res.data.token) {
+          updateState(initialState);
+          document.cookie = `token=${res.data.token}`
+          history.push(ROUTE_DASHBOARD);
+        }
+      } catch (e) {
+        updateState({
+          ...state,
+          error: e.response.data,
+        })
       }
-    } catch (e) {
-      updateState({
-        ...state,
-        error: e.response.data,
-      })
     }
   };
 
