@@ -24,6 +24,8 @@ const Login = ({ history }) => {
     e.preventDefault();
     const res = await axios.post("http://localhost:3000/signup", state);
     if(res.data.token) {
+      updateState(initialState);
+      document.cookie = `token=${res.data.token}`;
       history.push(ROUTE_DASHBOARD);
     }
   };
