@@ -9,5 +9,16 @@ module.exports = {
     } else {
       next();
     }
+  },
+
+  signIn: (req, res, next) => {
+    const user = req.body;
+    const { email, password } = user;
+    if(!email || !password) {
+      res.status(400).send("Please provide an email and password to sign in");
+      throw Error("Please provide an email and password to sign in");
+    } else {
+      next();
+    }
   }
 }

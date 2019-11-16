@@ -7,12 +7,12 @@ const getRequestor = require('../middleware/getRequestor');
 
 module.exports.set = (app) => {
   app.use(cors());
-  app.use(bodyParser.json()); 
+  app.use(bodyParser.json());
   // Anonymous routes
   // -----------------------
   app.get('/', root);
   app.post('/signup', validation.signUp, signUp);
-  app.post('/signin', signIn);
+  app.post('/signin', validation.signIn, signIn);
   // ----------------------
 
   // Authenticated routes
