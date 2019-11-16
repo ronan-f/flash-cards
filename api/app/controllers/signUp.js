@@ -7,6 +7,7 @@ const signUp = async (req, res) => {
     res.status(200).send(result);
 
   } catch (e) {
+    res.status(400).send(e);
     console.error(e);
   }
 }
