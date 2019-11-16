@@ -2,16 +2,17 @@ const saveUser = require('../DAL/saveUser');
 const getUser = require('../DAL/getUser');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const jwt = require('jsonwebtoken');
+const config = require('../../config');
 
 class UserService {
   async signUp({ name, email, password }) {
-
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    await saveUser(name, email, hashedPassword);
+    const userRecord = await saveUser(name, email, hashedPassword);
     return {
       name,
       email,
-      token: "Success"
+      token: this._generateJWT(userRecord)
     }
   }
 
@@ -31,9 +32,22 @@ class UserService {
     return {
       email,
       password,
-      token: "Success"
+      token: this._generateJWT(userRecord)
     }
 
+  }
+
+  _generateJWT(id, email, password) {
+    const data = {
+      id,
+      email,
+      password
+    }
+
+    const { signature } = config.jwt;
+    const expiration = '6h';
+
+    return jwt.sign({ data, }, signature, { expiresIn: expiration });
   }
 }
 

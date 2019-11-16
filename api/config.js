@@ -5,5 +5,8 @@ module.exports = {
     user: process.env.DB_USER,
     name: process.env.DB_NAME,
     password: process.env.DB_PASSWORD
+  },
+  jwt: {
+    signature: process.env.JWT_SIG
   }
 };
