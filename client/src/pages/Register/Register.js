@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
-import CustomAlert from '../../components/Alert';
+import CustomAlert from '../../components/CustomAlert';
 import { ROUTE_SIGN_IN, ROUTE_FORGOT_PASSWORD, ROUTE_DASHBOARD } from '../../constants';
 
 const Login = ({ history }) => {
