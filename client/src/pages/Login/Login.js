@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { ROUTE_REGISTER } from '../../constants';
 import './Login.styles.scss';
 
 const Login = () => (
@@ -19,7 +21,7 @@ const Login = () => (
       </FormGroup>
       <Button className="btn-lg btn-dark btn-block">Login</Button>
       <div className="text-center p-3">
-        <a href="/signup">Register</a>
+        <Link to={ ROUTE_REGISTER }>Register</Link>
         <span className="p-2">|</span>
         <a href="/signup">Forgot Password</a>
       </div>
