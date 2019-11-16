@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { ROUTE_SIGN_IN } from '../../constants';
+import { ROUTE_SIGN_IN, ROUTE_FORGOT_PASSWORD } from '../../constants';
 
 const Login = () => (
   <div className="vertical-center light-blue">
@@ -24,9 +24,9 @@ const Login = () => (
       </FormGroup>
       <Button className="btn-lg btn-dark btn-block">Login</Button>
       <div className="text-center p-3">
-        <Link to={ ROUTE_SIGN_IN }>Login</Link>
+        <Link to={ ROUTE_SIGN_IN }>Sign In</Link>
         <span className="p-2">|</span>
-        <a href="/signup">Forgot Password</a>
+        <Link to={ ROUTE_FORGOT_PASSWORD }>Forgot Password</Link>
       </div>
     </Form>
   </div>
