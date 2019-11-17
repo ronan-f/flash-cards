@@ -1,9 +1,7 @@
-.flash-card {
-  max-width: 600px;
-  min-height: 250px;
-}
-
 .flash-card-body {
+  max-height: 80vh;
+  min-width: 50vw;
+  max-width: 80vw;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -18,4 +16,10 @@
   button {
     width: 30%;
   }
+}
+
+.flash-card-front-options {
+  width: 94%;
+  display: flex;
+  justify-content: space-between;
 }
