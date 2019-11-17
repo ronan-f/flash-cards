@@ -1,0 +1,21 @@
+.flash-card {
+  max-width: 600px;
+  min-height: 250px;
+}
+
+.flash-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.flash-card-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  button {
+    width: 30%;
+  }
+}
