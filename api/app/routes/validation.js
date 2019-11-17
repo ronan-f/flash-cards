@@ -31,5 +31,16 @@ module.exports = {
     } else {
       next();
     }
+  },
+
+  deleteCard: (req, res, next) => {
+    const { id } = req.params;
+    if(!id) {
+      res.status(400).send("No card ID provided.");
+      throw Error("No card ID provided");
+    } else {
+      res.locals.card_id = id;
+      next();
+    }
   }
 }

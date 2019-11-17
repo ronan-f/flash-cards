@@ -1,6 +1,6 @@
 const cors = require('cors')
 const bodyParser = require('body-parser');
-const { signUp, root, signIn, getCurrentUser, createCard } = require('../controllers');
+const { signUp, root, signIn, getCurrentUser, createCard, deleteCard } = require('../controllers');
 const validation = require('./validation');
 const isAuth = require('../middleware/isAuth');
 const getRequestor = require('../middleware/getRequestor');
@@ -21,5 +21,6 @@ module.exports.set = (app) => {
   // ----------------------
   app.get('/user', getCurrentUser);
   app.post('/cards', validation.createCard, createCard);
+  app.delete('/card/:id', validation.deleteCard, deleteCard);
   // ----------------------
 }
