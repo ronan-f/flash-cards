@@ -26,13 +26,11 @@ Dashboard
 ![Dashboard](https://i.imgur.com/0GjNBfF.png)
 
 
-Technologies used:
+## Technologies used:
 
-The front end uses React with create-react-app and reactstrap.
-
-The back end is a node server built with express and a MySQL database.
-
-JWT's are used for authentcation and sessions.
+- The front end uses React with create-react-app and reactstrap.
+- The back end is a node server built with express and a MySQL database.
+- I've made use of JWT for authentication
 
 
 
