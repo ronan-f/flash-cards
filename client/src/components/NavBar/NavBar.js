@@ -11,14 +11,24 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
+import Cookies from 'universal-cookie';
+import { ROUTE_DASHBOARD } from '../../constants';
+import { withRouter } from 'react-router-dom';
 
-const Example = (props) => {
+const cookies = new Cookies();
+
+const CustomNavBar = ({ history }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
+  const handleLogout = () => {
+    cookies.remove('token', { path: '/' });
+    history.push(ROUTE_DASHBOARD);
+  }
+
   return (
-    <div className="light-blue border border-secondary navbar-width">
+    <div className="lighter-blue border border-secondary navbar-width">
       <Navbar light expand="md">
         <NavbarBrand href="/"><span className="font-weight-bold">FlashCards</span>.com</NavbarBrand>
         <NavbarToggler onClick={toggle} />
@@ -32,8 +42,8 @@ const Example = (props) => {
                 Account
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>
-                  Logout
+                <DropdownItem className="text-center">
+                  <span onClick={ handleLogout }>Logout</span>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
@@ -44,4 +54,4 @@ const Example = (props) => {
   );
 }
 
-export default Example;
+export default withRouter(CustomNavBar);
