@@ -12,7 +12,7 @@ const FlashCard = () => (
         <h1>
           <CardTitle className="font-weight-bold">Card title</CardTitle>
         </h1>
-        <img className="mb-3" width="50%" height="40%" src="https://images.unsplash.com/photo-1558981285-6f0c94958bb6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="Card image cap" />
+        <img className="mb-3" width="50%" height="40%" src="https://images.unsplash.com/photo-1558981285-6f0c94958bb6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="Placeholder" />
         <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
         <div className="flash-card-buttons">
           <Button color="danger">Hard</Button>
