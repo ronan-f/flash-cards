@@ -3,7 +3,8 @@ const CardService = require('../services/Card');
 const createCard = async (req, res) => {
   try {
     const card = req.body;
-    const result = await CardService.createCard(card);
+    const userID = req.currentUser.id;
+    const result = await CardService.createCard(card, userID);
     res.status(200).send(result);
 
   } catch (e) {

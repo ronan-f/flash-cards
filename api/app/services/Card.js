@@ -1,8 +1,8 @@
 const { Card } = require('../DAL');
 
 class CardService {
-  async createCard({ word, description, imageURL, category }) {
-    return await Card.saveCard(word, description, imageURL, category);
+  async createCard({ word, description, imageURL, category }, userID) {
+    return await Card.saveCard(word, description, imageURL, category, userID);
   }
 
 };

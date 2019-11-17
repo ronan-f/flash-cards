@@ -3,14 +3,15 @@ class Card {
     this.dbClient = dbClient;
   }
 
-  async saveCard(word, description, imageURL, category) {
+  async saveCard(word, description, imageURL, category, user_id) {
     return await this.dbClient('flash_cards')
       .insert({
         word,
         description,
         image_url: imageURL,
         category,
-        difficulty: 0
+        difficulty: 0,
+        user_id
       })
       .then(id => {
         return {
@@ -18,7 +19,8 @@ class Card {
           word,
           description,
           imageURL,
-          category
+          category,
+          user_id
         }
       })
       .catch(e => {
