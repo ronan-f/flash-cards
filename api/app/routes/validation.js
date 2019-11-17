@@ -20,5 +20,16 @@ module.exports = {
     } else {
       next();
     }
+  },
+
+  createCard: (req, res, next) => {
+    const card = req.body;
+    const { word, imageURL} = card;
+    if(!word || !imageURL) {
+      res.status(400).send("Please provide a word and imageURL to create a new card");
+      throw Error("No word or URL provided");
+    } else {
+      next();
+    }
   }
 }
