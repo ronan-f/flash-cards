@@ -5,6 +5,9 @@ import { Link, withRouter } from 'react-router-dom';
 import CustomAlert from '../../components/CustomAlert';
 import { ROUTE_SIGN_IN, ROUTE_FORGOT_PASSWORD, ROUTE_DASHBOARD } from '../../constants';
 import { isEmailValid } from '../../utilities/validator';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const Login = ({ history }) => {
   const initialState = {
@@ -42,7 +45,7 @@ const Login = ({ history }) => {
         const res = await axios.post("http://localhost:3000/signup", state);
         if(res.data.token) {
           updateState(initialState);
-          document.cookie = `token=${res.data.token}`;
+          cookies.set('token', res.data.token, { path: '/' });
           history.push(ROUTE_DASHBOARD);
         }
       } catch(e) {
@@ -59,7 +62,7 @@ const Login = ({ history }) => {
 
   return (
   <div className="vertical-center light-blue">
-    <Form className="login-form shadow rounded">
+    <Form className="login-form form-width shadow rounded">
       <h1 className="text-center">
         <span className="font-weight-bold">FlashCards</span>.com
       </h1>
