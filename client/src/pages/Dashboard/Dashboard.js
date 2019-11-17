@@ -1,7 +1,8 @@
 import React from 'react';
+import NavBar from '../../components/NavBar/NavBar';
 
 const Dashboard = () => (
-  <h1>Logged in to the dashboard</h1>
+  <NavBar />
 )
 
 export default Dashboard;
