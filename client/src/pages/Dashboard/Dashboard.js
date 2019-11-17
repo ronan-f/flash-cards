@@ -81,8 +81,7 @@ const Dashboard = () => {
 
   return (
   <div className="dashboard light-blue">
-    <NavBar />
-    <h1 className="text-center p-5">Hi {user.name} Welcome to FlashCards.com</h1>
+    <h1 className="text-center p-5">Hi {user.name}! Here are your cards to review:</h1>
     <div className="mt-3 flash-card-container">
       <FlashCard card={ currentCard } isFirstCard={ isFirstCard } changeCard={ changeCard } noMoreCards={ noMoreCards } />
     </div>

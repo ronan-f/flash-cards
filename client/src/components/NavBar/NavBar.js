@@ -12,8 +12,8 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
 import Cookies from 'universal-cookie';
-import { ROUTE_DASHBOARD } from '../../constants';
-import { withRouter } from 'react-router-dom';
+import { ROUTE_DASHBOARD, ROUTE_FORGOT_PASSWORD } from '../../constants';
+import { withRouter, Link } from 'react-router-dom';
 
 const cookies = new Cookies();
 
@@ -35,7 +35,9 @@ const CustomNavBar = ({ history }) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="/components/">Flash Cards</NavLink>
+              <Link to={ ROUTE_FORGOT_PASSWORD }>
+                <NavLink>Flash Cards</NavLink>
+              </Link>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
