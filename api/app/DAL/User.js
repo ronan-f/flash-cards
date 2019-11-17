@@ -21,6 +21,13 @@ class User {
         email,
         password: hashedPassword
       })
+      .then(id => {
+        return {
+          id: id[0],
+          name,
+          email
+        }
+      })
       .catch(e => {
         console.error(e);
         throw Error('Could not save user', e);

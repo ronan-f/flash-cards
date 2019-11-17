@@ -30,22 +30,21 @@ class UserService {
 
     return {
       email,
-      password,
       token: this._generateJWT(userRecord)
     }
 
   }
 
-  _generateJWT(id, email) {
+  _generateJWT({ id, email }) {
     const data = {
-      id,
-      email
+      email,
+      id
     }
 
     const { signature } = config.jwt;
     const expiration = '6h';
 
-    return jwt.sign({ data }, signature, { expiresIn: expiration });
+    return jwt.sign(data, signature, { expiresIn: expiration });
   }
 }
 

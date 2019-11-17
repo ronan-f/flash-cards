@@ -26,10 +26,13 @@ const Dashboard = () => {
       });
 
       const user = res.data;
-      updateState({
-        ...state,
-        loading: false,
-        user
+
+      updateState((currentState) => {
+        return {
+          ...currentState,
+          loading: false,
+          user
+        }
       })
     }
     getUser();
