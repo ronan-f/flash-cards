@@ -5,7 +5,7 @@ import { ROUTE_REGISTER, ROUTE_SIGN_IN } from '../../constants';
 
 const ForgotPassword = () => (
   <div className="vertical-center light-blue">
-    <Form className="login-form shadow rounded">
+    <Form className="login-form form-width shadow rounded">
       <h1 className="text-center">
         <span className="font-weight-bold">FlashCards</span>.com
       </h1>
