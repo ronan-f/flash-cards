@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Cookies from 'universal-cookie';
 import axios from 'axios';
 import LoadingIndicator from '../../components/LoadingIndicator/LoadingIndicator';
 import NavBar from '../../components/NavBar/NavBar';
 import FlashCard from '../../components/FlashCard/FlashCard';
+import { getJWT } from '../../utilities/getJWT';
 import './Dashboard.styles.scss';
-
-const cookies = new Cookies();
 
 const Dashboard = () => {
   const initialState = {
@@ -19,11 +17,7 @@ const Dashboard = () => {
   const [state, updateState] = useState(initialState);
   useEffect(() => {
     const getUser = async () => {
-      const res = await axios.get("http://localhost:3000/user", {
-        headers: {
-          "Authorization": `Bearer ${cookies.get('token')}`
-        }
-      });
+      const res = await axios.get("http://localhost:3000/user", getJWT());
 
       const user = res.data;
 
