@@ -18,8 +18,15 @@
   }
 }
 
-.flash-card-front-options {
+.flash-card-front-options, .flash-card-options-first {
   width: 94%;
   display: flex;
+}
+
+.flash-card-front-options {
   justify-content: space-between;
+}
+
+.flash-card-options-first {
+  justify-content: flex-end;
 }
