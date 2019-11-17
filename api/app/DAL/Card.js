@@ -30,6 +30,17 @@ class Card {
 
   }
 
+  async getCards(user_id) {
+    return await this.dbClient('flash_cards')
+      .select('*')
+      .where({ user_id })
+      .then(res => res)
+      .catch(e => {
+        console.error(e);
+        throw Error(`Cannot find cards for user_id ${user_id}`)
+      })
+  }
+
   async getCard(id) {
     return await this.dbClient('flash_cards')
       .select('*')

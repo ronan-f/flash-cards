@@ -4,5 +4,6 @@ module.exports = {
   signIn: require('./signIn'),
   getCurrentUser: require('./getCurrentUser'),
   createCard: require('./createCard'),
-  deleteCard: require('./deleteCard')
+  deleteCard: require('./deleteCard'),
+  getCards: require('./getCards')
 }

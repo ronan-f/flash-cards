@@ -9,6 +9,10 @@ class CardService {
     return await Card.getCard(id);
   }
 
+  async getCards(user_id) {
+    return await Card.getCards(user_id);
+  }
+
   async deleteCard(id) {
     return await Card.deleteCard(id);
   }
