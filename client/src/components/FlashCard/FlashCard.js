@@ -28,7 +28,7 @@ const FlashCard = ({ card: { image_url, description, word }, changeCard, isFirst
             {!isFirstCard && <Button onClick={ () => changeCard(OPTION_PREVIOUS) } color="warning">&larr;</Button>}
             <Button onClick={ flipCard } className="btn-dark">&#8635;</Button>
           </div>
-          { image_url && <img className="mb-5" width="50%" height="40%" src={image_url} alt="Placeholder" />}
+          { image_url && <img className="mb-5" src={image_url} alt="Placeholder" />}
           {
             cardOrientation === "front"
             ? <h4 className="font-weight-bold">{ description }</h4>
