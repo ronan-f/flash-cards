@@ -23,10 +23,10 @@ const PrivateRoute = ({ component: Component, history, ...rest }) => {
       const user = res.data;
 
       updateLoggedInUser(user);
+      updateLoading(false);
     }
 
     getUser();
-    updateLoading(false);
 
   }, [cookieValue, loading, history]);
 
