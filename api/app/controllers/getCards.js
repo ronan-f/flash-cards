@@ -2,7 +2,7 @@ const Card = require('../services/Card');
 
 const getCards = async (req, res) => {
   try {
-    const { currentUser: { id } } = req;
+    const { id } = req.currentUser;
     const cards = await Card.getCards(id);
     res.status(200).json(cards);
   } catch (e) {
