@@ -1,24 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from '../components/NavBar/NavBar';
+import axios from 'axios';
+import { getJWT } from '../utilities/getJWT';
 import { ROUTE_SIGN_IN } from '../constants';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import LoadingIndicator from './LoadingIndicator/LoadingIndicator';
 
 const cookies = new Cookies();
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={(props) => {
-    const cookieValue = cookies.get('token');
+const PrivateRoute = ({ component: Component, history, ...rest }) => {
+  const [loggedInUser, updateLoggedInUser] = useState({});
+  const [loading, updateLoading] = useState(true);
 
-    if (!cookieValue) return <Redirect to={ROUTE_SIGN_IN} />;
+  const cookieValue = cookies.get('token');
 
-    return (
+  useEffect(() => {
+    if (!cookieValue) return history.push(ROUTE_SIGN_IN);
+
+    const getUser = async () => {
+      const res = await axios.get("http://localhost:3000/user", getJWT());
+      const user = res.data;
+
+      updateLoggedInUser(user);
+    }
+
+    getUser();
+    updateLoading(false);
+
+  }, [cookieValue, loading, history]);
+
+  if (loading) return <LoadingIndicator />;
+
+  return (
+    <Route {...rest} render={(props) => (
       <React.Fragment>
-        <NavBar />
-        <Component {...props} />
+        <NavBar me={loggedInUser} />
+        <Component me={loggedInUser} {...props} />
       </React.Fragment>
-    )
-  }} />
-)
+    )} />
+  )
+}
 
-export default PrivateRoute;
+export default withRouter(PrivateRoute);
