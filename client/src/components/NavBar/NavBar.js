@@ -13,7 +13,7 @@ import {
   DropdownItem } from 'reactstrap';
 import Cookies from 'universal-cookie';
 import { ROUTE_DASHBOARD, ROUTE_FORGOT_PASSWORD } from '../../constants';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 const cookies = new Cookies();
 

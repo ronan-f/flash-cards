@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import LoadingIndicator from '../../components/LoadingIndicator/LoadingIndicator';
-import NavBar from '../../components/NavBar/NavBar';
 import FlashCard from '../../components/FlashCard/FlashCard';
 import { getJWT } from '../../utilities/getJWT';
 import './Dashboard.styles.scss';
