@@ -35,9 +35,7 @@ const CustomNavBar = ({ history }) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <Link to={ ROUTE_FORGOT_PASSWORD }>
-                <NavLink>Flash Cards</NavLink>
-              </Link>
+              <NavLink href={ ROUTE_FORGOT_PASSWORD }>Flash Cards</NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
