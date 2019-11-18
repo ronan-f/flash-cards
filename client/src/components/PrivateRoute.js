@@ -9,14 +9,16 @@ const cookies = new Cookies();
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => {
     const cookieValue = cookies.get('token');
+
+    if (!cookieValue) return <Redirect to={ROUTE_SIGN_IN} />;
+
     return (
-    cookieValue ?
       <React.Fragment>
         <NavBar />
         <Component {...props} />
       </React.Fragment>
-      : <Redirect to={ ROUTE_SIGN_IN } />
-  )}} />
+    )
+  }} />
 )
 
 export default PrivateRoute;
