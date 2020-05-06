@@ -2,7 +2,7 @@
 
 This is a work in progress...
 
-I started to learn Chinese a couple of years ago but the flash card apps I used didn't have the features I wanted or where too complicated so I've decided to build my own.
+I started to learn Chinese a couple of years ago but the flash card apps I used didn't have the features I wanted or were too complicated so I've decided to build my own.
 
 Here are some screenshots of the current build:
 
